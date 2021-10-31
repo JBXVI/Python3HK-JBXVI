@@ -1,0 +1,7 @@
+iptables --flush 
+iptables --tablenat --append POSTROUTING ---out-interface eth0 -j MASQUERADE
+iptables --append FORWARD --in-interface wlan0 -j ACCEPT
+iptables -t nat -A POSTROUTING -J MASQUERADE
+echo >1 proc/sys/net/ipv4/ip_forward
+
+#this ip tables rules is for forwarding internet from wlan0 to the target device(because they will lost connection while we do arp_spoofing)
